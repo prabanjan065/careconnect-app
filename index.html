@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b87">
+  <meta name="description" content="CareConnect clinic appointment booking demo">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>CareConnect | Clinic Services</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" data-view="home"><span class="brand-icon">✚</span> CareConnect</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Toggle navigation">☰</button>
+    <nav id="nav">
+      <button data-view="home" class="nav-link active">Home</button>
+      <button data-view="services" class="nav-link">Services</button>
+      <button data-view="appointments" class="nav-link">My appointments</button>
+      <button data-view="profile" class="nav-link">Profile</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="view">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">CARE MADE SIMPLE</span>
+          <h1>Your health appointments,<br><span>made easier.</span></h1>
+          <p>Explore clinic services, choose a convenient time and keep your appointments in one place.</p>
+          <button class="btn btn-light" data-view="services">Explore services <span>→</span></button>
+          <p class="demo-note">Student project demo · Sample clinic information</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="circle circle-one"></div><div class="circle circle-two"></div>
+          <div class="doctor-card"><div class="doctor-avatar">✚</div><strong>Care that fits your day</strong><small>Appointments made simple</small><div class="mini-check">✓ Booking confirmed</div></div>
+        </div>
+      </div>
+      <div class="section-heading"><div><span class="eyebrow">QUICK ACCESS</span><h2>How can we help?</h2></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" data-view="services"><span class="quick-icon blue">＋</span><strong>Book a visit</strong><small>Browse clinic services</small></button>
+        <button class="quick-card" data-view="appointments"><span class="quick-icon mint">▣</span><strong>My appointments</strong><small>View your bookings</small></button>
+        <button class="quick-card" data-view="profile"><span class="quick-icon peach">♡</span><strong>My profile</strong><small>Manage your details</small></button>
+      </div>
+      <div class="notice"><span>ⓘ</span><div><strong>Demo information</strong><p>This prototype uses sample services and simulated bookings. It is not a real medical service.</p></div></div>
+    </section>
+
+    <section id="services" class="view hidden">
+      <div class="page-intro"><span class="eyebrow">OUR CLINIC</span><h1>Explore services</h1><p>Choose a sample service to start an appointment request.</p></div>
+      <label class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search services..." aria-label="Search services"></label>
+      <div id="serviceGrid" class="service-grid"></div>
+    </section>
+
+    <section id="booking" class="view hidden">
+      <button class="back-link" data-view="services">← Back to services</button>
+      <div class="page-intro"><span class="eyebrow">APPOINTMENT REQUEST</span><h1>Book an appointment</h1><p>Complete the form below. No real payment or medical data is collected.</p></div>
+      <form id="bookingForm" class="form-card">
+        <div id="chosenService" class="chosen-service"></div>
+        <div class="form-grid">
+          <label>Patient name<input id="patientName" required maxlength="60" placeholder="Enter your name"></label>
+          <label>Contact email<input id="patientEmail" type="email" required maxlength="100" placeholder="you@example.com"></label>
+          <label>Appointment date<input id="appointmentDate" type="date" required></label>
+          <label>Preferred time<select id="appointmentTime" required><option value="">Choose a time</option><option>09:00 AM</option><option>10:30 AM</option><option>12:00 PM</option><option>02:00 PM</option><option>03:30 PM</option></select></label>
+          <label class="full">Payment option<select id="paymentMethod" required><option value="Pay at clinic">Pay at clinic</option><option value="Simulated UPI">Simulated UPI (demo only)</option><option value="Simulated card">Simulated card (demo only)</option></select><small>Demo only. No money will be charged.</small></label>
+        </div>
+        <div class="price-row"><span>Sample booking fee</span><strong id="chosenPrice">₹0</strong></div>
+        <button class="btn btn-primary full-btn" type="submit">Confirm demo booking</button>
+        <p class="form-foot">By continuing, you agree that this is a student demonstration using sample data.</p>
+      </form>
+    </section>
+
+    <section id="appointments" class="view hidden">
+      <div class="page-intro"><span class="eyebrow">YOUR ACTIVITY</span><h1>My appointments</h1><p>Track the demo appointment requests saved on this device.</p></div>
+      <div id="appointmentList"></div>
+    </section>
+
+    <section id="profile" class="view hidden">
+      <div class="page-intro"><span class="eyebrow">ACCOUNT</span><h1>Patient profile</h1><p>Save your display name and contact email for this demo.</p></div>
+      <form id="profileForm" class="form-card profile-form">
+        <div class="profile-avatar">♡</div>
+        <label>Display name<input id="profileName" maxlength="60" placeholder="Your name"></label>
+        <label>Email address<input id="profileEmail" type="email" maxlength="100" placeholder="you@example.com"></label>
+        <button class="btn btn-primary" type="submit">Save profile</button>
+        <p id="profileMessage" class="form-foot" role="status"></p>
+      </form>
+      <div class="form-card feedback-card">
+        <span class="eyebrow">HELP US IMPROVE</span><h2>Share feedback</h2>
+        <form id="feedbackForm">
+          <label>How was the experience?
+            <select id="rating"><option value="5">★★★★★ — Excellent</option><option value="4">★★★★☆ — Good</option><option value="3">★★★☆☆ — Okay</option><option value="2">★★☆☆☆ — Needs work</option><option value="1">★☆☆☆☆ — Poor</option></select>
+          </label>
+          <label>Comment<textarea id="feedbackComment" rows="3" maxlength="500" placeholder="What could we improve?"></textarea></label>
+          <button class="btn btn-primary" type="submit">Submit feedback</button>
+          <p id="feedbackMessage" class="form-foot" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>CareConnect</strong><span>Student prototype · Sample data only</span><button data-view="profile">Contact & feedback</button></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
+  </script>
+</body>
+</html>
